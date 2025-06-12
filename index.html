@@ -25,9 +25,9 @@ m\ddot x + c\dot x + kx = f,~~~y=x. \label{eq:VivEq}
 \end{align}
 <p>ここに、\(m\)は質量、\(c\)は粘性係数、\(k\)は弾性係数です。</p>
 
-<p>\(a=c/m\)、\(b=k/m\)、\(u=f/b\)とおくと次式が得られます。</p>
+<p>\(a=c/m\)、\(b=k/m\)、\(bu=f/m\)とおくと次式が得られます。</p>
 \begin{align}
-\ddot x + a\dot x + bx = bu \label{eq:VivEq1}
+\ddot x + a\dot x + bx = bu,~~~y=x \label{eq:VivEq1}
 \end{align}
 
 <p>固有角振動数\(\omega_n=\sqrt{k/m}\)なので、\(b=\omega_n^2\)です。
@@ -129,34 +129,61 @@ b
 \right].
 \end{align}
 
-<p><a href="https://aoyamakohbo.github.io/StareEq2/">離散型状態空間表現</a> に変換します。</p>
+<p>連続型空間表現の係数行列\(\mathbf{A}\)、\(\mathbf{B}\)を
+  <a href="https://aoyamakohbo.github.io/StareEq2/">離散型状態空間表現</a> の係数行列\(\mathbf{P}\)、\(\mathbf{Q}\)に変換します。</p>
 \begin{align}
 \mathbf{P}=e^{\mathbf{A}T}=
 \left[
 \begin{array}{@{\,}cc}
-0&1\\
--3943&-25.12
+0.9531&0.004222\\
+-18.23&0.8370
 \end{array}
 \right],~~~
 \mathbf{Q}=\mathbf{A}^{-1}(e^{\mathbf{A}T}-\mathbf{I})\mathbf{B}=
 \left[
 \begin{array}{@{\,}c}
 -0.04691\\
-0.004622
+18.23
 \end{array}
 \right]
 \label{eq:RtnEqn}
 \end{align}
 
 <p>係数行列\(\mathbf{P}\)、\(\mathbf{Q}\)を用いて式\eqref{eq:VivEq}は次式の離散型状態空間表現で記述されます。</p>
-    \begin{align}
-    \left.
-    \begin{array}{@{\,}rl}
-    \mathbf{x}(n+1)=&\mathbf{P}\mathbf{x}(n) + \mathbf{Q}u(n)\\
-    y(n)  =&\mathbf{C}\mathbf{x}(n)
-    \end{array}
-    \right\} \label{eq:DiscStateEq}
-    \end{align}
+ \begin{align}
+\left[
+\begin{array}{@{\,}l}
+x(n+1)\\
+\dot x(n+1)
+\end{array}
+\right]
+=
+\left[
+\begin{array}{@{\,}cc}
+0.9531&0.004222\\
+-18.23&0.8370
+\end{array}
+\right]\left[
+\begin{array}{@{\,}l}
+x(n)\\
+\dot x(n)
+\end{array}
+\right]
++
+\left[
+\begin{array}{@{\,}c}
+-0.04691\\
+18.23
+\end{array}
+\right]u(n),~~~
+y(n)=[1~~0]
+\left[
+\begin{array}{@{\,}l}
+x(n)\\
+\dot x(n)
+\end{array}
+\right].
+\end{align}
 
 <p><a href="https://aoyamakohbo.github.io/Craftlogy/">->TOP</a></p>
 </body>
