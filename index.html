@@ -1,191 +1,31 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
-<html lang="ja">
-
+<!DOCTYPE html>
+<html>
   <head>
-     <script type="text/x-mathjax-config">
-
-       MathJax.Hub.Config({TeX:{equationNumbers:{autoNumber:"AMS"}}});
-
-    </script>
-
-    <script type="text/javascript" async 
-
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
-
-    </script>
-
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>クラフトロジー創技房</title>
   </head>
 
-<body>
-    <h3>一自由度粘弾性振動系</h3>
-<p>一自由度粘弾性振動系の振動(運動)方程式は次式となります。</p>
-\begin{align}
-m\ddot x + c\dot x + kx = f,~~~y=x. \label{eq:VivEq}
-\end{align}
-<p>ここに、\(m\)は質量、\(c\)は粘性係数、\(k\)は弾性係数です。</p>
+ <div class="header">
+     <div class="header-logo">クラフトロジー創技房</div>
+   </div>
+    <h3>準備室</h3>
+        <p>基本的な知識を確認します。</p>
+      <ul>
+        <li><a href="https://aoyamakohbo.github.io/AnalogStateEq/">連続時間状態方程式</a>
+        <li><a href="https://aoyamakohbo.github.io/StateEq/">離散時間状態方程式 その１(１変数の場合)</a>
+        <li><a href="https://aoyamakohbo.github.io/StareEq2/">離散時間状態方程式 その２(多変数の場合)</a>      
+        <li><a href="https://aoyamakohbo.github.io/LstSqrMth/">逐次最小二乗法 その１(１変数の場合)</a>
+        <li><a href="https://aoyamakohbo.github.io/LstSqtMth2/">逐次最小二乗法 その２(多変数の場合)</a>
+        <li><a href="https://aoyamakohbo.github.io/KalmanFltr/">定常カルマンフィルタ</a>
+        <li><a href="https://aoyamakohbo.github.io/Riccati/">Riccati方程式の解によるカルマンゲインの定式化</a>
+        <li><a href="https://aoyamakohbo.github.io/HypStb/">Popovの超安定論</a>
+        <li><a href="https://aoyamakohbo.github.io/AdaptCont/">モデル規範適応制御</a>
+        <li><a href="https://aoyamakohbo.github.io/AdaptIdent/">適応同定</a>
+      </ul>
 
-<p>\(a=c/m\)、\(b=k/m\)、\(bu=f/m\)とおくと次式が得られます。</p>
-\begin{align}
-\ddot x + a\dot x + bx = bu,~~~y=x \label{eq:VivEq1}
-\end{align}
-
-<p>固有角振動数\(\omega_n=\sqrt{k/m}\)なので、\(b=\omega_n^2\)です。
-  また、\(a=2\zeta\omega_n\)と表記します。
-</p>
-<p>式\eqref{eq:VivEq1}を<a href="https://aoyamakohbo.github.io/AnalogStateEq/">状態空間表現</a>すると次式になります。</p>
-\begin{align}
-\left[
-\begin{array}{@{\,}l}
-\dot x\\
-\ddot x
-\end{array}
-\right]
-=
-\left[
-\begin{array}{@{\,}cc}
-0&1\\
--b&a
-\end{array}
-\right]\left[
-\begin{array}{@{\,}l}
-x\\
-\dot x
-\end{array}
-\right]
-+
-\left[
-\begin{array}{@{\,}l}
-0\\
-b
-\end{array}
-\right]u,~~~
-y=[1~~0]
-\left[
-\begin{array}{@{\,}l}
-x\\
-\dot x
-\end{array}
-\right].
-\end{align}
-<p>そこで、状態ベクトル\(\mathbf{x}\)と係数行列\(\mathbf{A}\)、\(\mathbf{B}\)、\(\mathbf{C}\)を次式のように設定します。</p>
-\begin{align}
-\mathbf{x}
-=\left[
-\begin{array}{@{\,}l}
-x\\
-\dot x
-\end{array}
-\right],~~~
-\mathbf{A}
-=
-\left[
-\begin{array}{@{\,}cc}
-0&1\\
--b&-a
-\end{array}
-\right],~~~
-\mathbf{B}
-=
-\left[
-\begin{array}{@{\,}l}
-0\\
-b
-\end{array}
-\right],~~~
-\mathbf{C}=[1~~0].
-\end{align}
-
-<p>状態ベクトル\(\mathbf{x}\)と係数行列\(\mathbf{A}\)、\(\mathbf{B}\)、\(\mathbf{C}\)
-  を用いて式\eqref{eq:VivEq}を次式のように連続型状態空間表現できます。</p>
-    \begin{align}
-    \left\{
-    \begin{array}{@{\,}cl}
-    \dot{\mathbf{x}} ~=& \mathbf{A}\mathbf{x} + \mathbf{B}\mathbf{u}\\
-    \mathbf{y} ~=& \mathbf{C}\mathbf{x}
-    \end{array}
-    \right. \label{eq:StateEq}
-    \end{align}
-
-<p>サンプリング周期\(T=0.005\)[s]、\(\omega_n=6.28×10\)[rad/s]、\(\zeta=0.2\)とすると、
-  \(a=25.12\)、\(b=3943\)です。
-</p>
-\begin{align}
-\mathbf{A}
-=
-\left[
-\begin{array}{@{\,}cc}
-0&1\\
--3943&-25.12
-\end{array}
-\right],~~~
-\mathbf{B}
-=
-\left[
-\begin{array}{@{\,}c}
-0\\
-3943
-\end{array}
-\right].
-\end{align}
-
-<p>連続型空間表現の係数行列\(\mathbf{A}\)、\(\mathbf{B}\)を
-  <a href="https://aoyamakohbo.github.io/StareEq2/">離散型状態空間表現</a> の係数行列\(\mathbf{P}\)、\(\mathbf{Q}\)に変換します。</p>
-\begin{align}
-\mathbf{P}=e^{\mathbf{A}T}=
-\left[
-\begin{array}{@{\,}cc}
-0.9531&0.004222\\
--18.23&0.8370
-\end{array}
-\right],~~~
-\mathbf{Q}=\mathbf{A}^{-1}(e^{\mathbf{A}T}-\mathbf{I})\mathbf{B}=
-\left[
-\begin{array}{@{\,}c}
--0.04691\\
-18.23
-\end{array}
-\right]
-\label{eq:RtnEqn}
-\end{align}
-
-<p>係数行列\(\mathbf{P}\)、\(\mathbf{Q}\)を用いて式\eqref{eq:VivEq}は次式の離散型状態空間表現で記述されます。</p>
- \begin{align}
-\left[
-\begin{array}{@{\,}l}
-x(n+1)\\
-\dot x(n+1)
-\end{array}
-\right]
-=
-\left[
-\begin{array}{@{\,}cc}
-0.9531&0.004222\\
--18.23&0.8370
-\end{array}
-\right]\left[
-\begin{array}{@{\,}l}
-x(n)\\
-\dot x(n)
-\end{array}
-\right]
-+
-\left[
-\begin{array}{@{\,}c}
--0.04691\\
-18.23
-\end{array}
-\right]u(n),~~~
-y(n)=[1~~0]
-\left[
-\begin{array}{@{\,}l}
-x(n)\\
-\dot x(n)
-\end{array}
-\right].
-\end{align}
-
-<p><a href="https://aoyamakohbo.github.io/Craftlogy/">->TOP</a></p>
-</body>
-
+    <h3>練習室</h3>
+        <p>数値計算使って準備室の知識を確認します。</p>
+      <ul>
+        <li><a href="https://aoyamakohbo.github.io/VscElsVib1D/">一自由度粘弾性振動系</a>
+ </ul>
 </html>
